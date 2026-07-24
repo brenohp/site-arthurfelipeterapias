@@ -1,16 +1,25 @@
+import type { Metadata } from 'next'
 import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
+import CookieConsent from './components/CookieConsent' // <--- Nova importação
+
+export const metadata: Metadata = {
+  title: 'Arthur Felipe | Terapias Orientais',
+  description: 'Terapias orientais para alívio de dores crônicas. O melhor de Ribeirão Preto e região.',
+  icons: {
+    icon: '/favicon.ico',
+  },
+}
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  // A classe scroll-pt-24 avisa ao navegador para "parar" 96px antes do topo
   return (
-    <html lang="pt-BR" className="scroll-smooth scroll-pt-24">
+    <html lang="pt-BR" className="scroll-smooth">
       <body className="flex flex-col min-h-screen relative">
         <Header />
         <div className="flex-grow">
@@ -18,6 +27,7 @@ export default function RootLayout({
         </div>
         <Footer />
         <WhatsAppButton />
+        <CookieConsent /> {/* <--- Adicionado aqui */}
       </body>
     </html>
   )

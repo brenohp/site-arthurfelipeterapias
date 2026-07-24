@@ -1,0 +1,15 @@
+Site Arthur Felipe Terapias
+
+-> Registrar domínio
+-> Retirar quiropraxia japonesa e deixar somente Quiropraxia
+-> Configurar SEO deixar fácil acesso e chamativo para paginas e Google
+-> Configurar Google Analytics
+-> Configurar Pop-up aceite de cookie (para poder usar o google analytics)
+-> Ver o que da para fazer com analytics (GA4) e meta pixel (USAR GTM MAIS FACIL)
+-> Ver tudo que da pra fazer para deixar o negócio chamativo com tags e etc
+
+
+Futuramente
+
+-> Painel para configuração e gerenciamento de postagens
+-> Painel para verificação de dados do analytics
