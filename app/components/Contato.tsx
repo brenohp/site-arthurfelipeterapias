@@ -2,8 +2,8 @@ import { FaWhatsapp, FaInstagram, FaStar } from 'react-icons/fa'
 
 export default function Contato() {
   return (
-    <section id="contato" className="py-16 md:py-24 border-t border-brand-red/20">
-      <div className="bg-brand-black rounded-2xl p-8 md:p-16 shadow-2xl">
+    <section id="contato" className="py-16 md:py-24 border-t border-brand-red/20 overflow-hidden">
+      <div className="bg-brand-black rounded-2xl p-8 md:p-16 shadow-2xl" data-aos="fade-up">
         
         {/* Cabeçalho do Contato */}
         <div className="text-center mb-12">
@@ -19,7 +19,7 @@ export default function Contato() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
           
           {/* WhatsApp */}
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-4" data-aos="fade-up" data-aos-delay="100">
             <div className="bg-brand-red p-5 rounded-full shadow-lg">
               <FaWhatsapp className="text-3xl text-white" />
             </div>
@@ -38,7 +38,7 @@ export default function Contato() {
           </div>
 
           {/* Instagram */}
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-4" data-aos="fade-up" data-aos-delay="250">
             <div className="bg-brand-red p-5 rounded-full shadow-lg">
               <FaInstagram className="text-3xl text-white" />
             </div>
@@ -57,7 +57,7 @@ export default function Contato() {
           </div>
 
           {/* Avaliações do Google */}
-          <div className="flex flex-col items-center gap-4">
+          <div className="flex flex-col items-center gap-4" data-aos="fade-up" data-aos-delay="400">
             <div className="bg-brand-red p-5 rounded-full shadow-lg">
               <FaStar className="text-3xl text-white" />
             </div>

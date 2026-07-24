@@ -20,10 +20,10 @@ export default function Terapias() {
   ]
 
   return (
-    <section id="terapias" className="py-16 md:py-24 border-t border-brand-red/20">
+    <section id="terapias" className="py-16 md:py-24 border-t border-brand-red/20 overflow-hidden">
       
-      {/* Cabeçalho da Seção */}
-      <div className="text-center mb-16">
+      {/* Cabeçalho Animação 1 */}
+      <div className="text-center mb-16" data-aos="fade-up">
         <h2 className="text-3xl md:text-4xl font-bold text-brand-black">
           Especialidades e <span className="text-brand-red">Terapias</span>
         </h2>
@@ -32,11 +32,13 @@ export default function Terapias() {
         </p>
       </div>
 
-      {/* Grid de Cards */}
+      {/* Grid de Cards - Efeito cascata usando delay */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {servicos.map((servico, index) => (
           <div 
             key={index} 
+            data-aos="fade-up" 
+            data-aos-delay={index * 150} // 0ms, 150ms, 300ms...
             className="bg-white/40 p-8 rounded-lg border border-brand-red/10 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
           >
             <div className="flex justify-center">

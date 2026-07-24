@@ -3,11 +3,12 @@ import './globals.css'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
-import CookieConsent from './components/CookieConsent' // <--- Nova importação
+import CookieConsent from './components/CookieConsent'
+import AosInit from './components/AosInit' // <--- NOVA IMPORTAÇÃO
 
 export const metadata: Metadata = {
   title: 'Arthur Felipe | Terapias',
-  description: 'Terapias orientais para alívio de dores crônicas. O melhor de Ribeirão Preto e região.',
+  description: 'Tratamentos de Quiropraxia e Terapias Orientais para alívio de dores crônicas. O melhor de Ribeirão Preto e região.',
   icons: {
     icon: '/favicon.ico',
   },
@@ -27,7 +28,8 @@ export default function RootLayout({
         </div>
         <Footer />
         <WhatsAppButton />
-        <CookieConsent /> {/* <--- Adicionado aqui */}
+        <CookieConsent />
+        <AosInit /> {/* <--- ATIVANDO AS ANIMAÇÕES AQUI */}
       </body>
     </html>
   )
