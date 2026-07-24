@@ -8,8 +8,8 @@ export default function Terapias() {
       icone: <FaBone className="text-4xl text-brand-red mb-4" />
     },
     {
-      titulo: "Quiropraxia Japonesa",
-      descricao: "Conhecida tradicionalmente como Seitai e New Seitai. Uma técnica milenar leve e sutil que respeita os limites estruturais do corpo, promovendo reequilíbrio profundo.",
+      titulo: "Seitai e New Seitai",
+      descricao: "Técnica oriental milenar focada no reequilíbrio estrutural. Uma abordagem leve e sutil que respeita os limites do corpo, atuando na liberação profunda de músculos e articulações.",
       icone: <FaYinYang className="text-4xl text-brand-red mb-4" />
     },
     {
