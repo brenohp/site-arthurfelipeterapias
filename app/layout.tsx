@@ -6,7 +6,7 @@ import WhatsAppButton from './components/WhatsAppButton'
 import CookieConsent from './components/CookieConsent' // <--- Nova importação
 
 export const metadata: Metadata = {
-  title: 'Arthur Felipe | Terapias Orientais',
+  title: 'Arthur Felipe | Terapias',
   description: 'Terapias orientais para alívio de dores crônicas. O melhor de Ribeirão Preto e região.',
   icons: {
     icon: '/favicon.ico',
