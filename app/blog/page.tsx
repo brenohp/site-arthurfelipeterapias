@@ -30,7 +30,7 @@ export default function Blog() {
           Nosso <span className="text-brand-red">Blog</span>
         </h1>
         <p className="mt-4 text-lg text-brand-black/80 max-w-2xl mx-auto">
-          Acompanhe nossos casos de sucesso, artigos sobre terapias orientais, pesquisas e dicas para o seu bem-estar.
+          Acompanhe nossos casos de sucesso, artigos sobre terapias, pesquisas e dicas para o seu bem-estar.
         </p>
       </div>
 
