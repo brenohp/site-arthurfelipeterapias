@@ -13,7 +13,7 @@ export default function Hero() {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold text-brand-black leading-tight">
-          Equilíbrio e Bem-estar com <span className="text-brand-red">Terapias Orientais</span>
+          Equilíbrio e Bem-estar com <span className="text-brand-red">Quiropraxia e Terapias Especializadas</span>
         </h1>
         
         <p className="text-lg text-brand-black/80 font-medium italic border-l-4 border-brand-red pl-4">
@@ -21,7 +21,7 @@ export default function Hero() {
         </p>
 
         <p className="text-brand-black/70">
-          Especialista em Terapia Manual, tratamento de Coluna, Esporão de Calcâneo e Tendinopatias. Agende sua avaliação e recupere sua qualidade de vida.
+          Especialista em Quiropraxia, Terapia Manual, tratamento de Coluna, Esporão de Calcâneo e Tendinopatias. Agende sua avaliação e recupere sua qualidade de vida.
         </p>
         
         <div className="pt-4">

@@ -10,10 +10,10 @@ export default function Sobre() {
           </h2>
           <div className="space-y-4 text-brand-black/80 text-lg">
             <p>
-              Com dedicação integral ao bem-estar e à saúde física, sou especialista em Fisioterapia e Massoterapia, unindo o conhecimento clínico tradicional com abordagens orientais focadas no reequilíbrio do corpo.
+              Com dedicação integral ao bem-estar e à saúde física, sou especialista em Fisioterapia e Massoterapia, unindo o conhecimento clínico tradicional com diversas abordagens terapêuticas focadas no reequilíbrio do corpo.
             </p>
             <p>
-              Minha especialidade em <strong>Quiropraxia Japonesa (Seitai)</strong> permite atuar diretamente na estrutura corporal, aliviando dores crônicas, corrigindo posturas e melhorando a mobilidade de forma eficaz e natural.
+              Minha especialidade em <strong>Quiropraxia e diversas terapias manuais</strong> permite atuar diretamente na estrutura corporal, aliviando dores crônicas, corrigindo posturas e melhorando a mobilidade de forma eficaz e natural.
             </p>
             <p>
               Meu principal objetivo é proporcionar um atendimento humanizado, entendendo a necessidade de cada paciente para entregar a melhor qualidade de vida possível.

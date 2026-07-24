@@ -23,7 +23,7 @@ export default function Footer() {
 
         {/* Informações e Direitos Autorais */}
         <div className="text-center md:text-right text-sm text-brand-beige/70">
-          <p className="mb-1">&copy; {anoAtual} Arthur Felipe Terapias Orientais.</p>
+          <p className="mb-1">&copy; {anoAtual} Arthur Felipe Terapias.</p>
           <p>Todos os direitos reservados | Ribeirão Preto - SP</p>
         </div>
 

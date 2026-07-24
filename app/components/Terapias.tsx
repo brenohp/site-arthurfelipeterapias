@@ -3,19 +3,19 @@ import { FaHands, FaBone, FaYinYang } from 'react-icons/fa'
 export default function Terapias() {
   const servicos = [
     {
-      titulo: "Terapia Manual",
-      descricao: "Tratamento especializado focado na recuperação de tendinopatias e esporão de calcâneo, devolvendo a sua mobilidade natural e qualidade de vida.",
-      icone: <FaHands className="text-4xl text-brand-red mb-4" />
-    },
-    {
-      titulo: "Tratamento de Coluna",
-      descricao: "Atendimento focado no alívio de dores e correção estrutural, ideal para quem sofre com patologias, desgastes ou desconfortos agudos e crônicos.",
+      titulo: "Quiropraxia",
+      descricao: "Técnicas avançadas de ajustes articulares. Utilizo uma combinação de diversas abordagens quiropráticas para tratar a raiz da sua dor, alinhar a coluna e estruturar o corpo todo.",
       icone: <FaBone className="text-4xl text-brand-red mb-4" />
     },
     {
-      titulo: "Seitai e New Seitai",
-      descricao: "Técnica leve e sutil que respeita os limites estruturais do corpo, fazendo com que possa ser aplicada até mesmo em patologias crônicas na região da coluna vertebral.",
+      titulo: "Quiropraxia Japonesa",
+      descricao: "Conhecida tradicionalmente como Seitai e New Seitai. Uma técnica milenar leve e sutil que respeita os limites estruturais do corpo, promovendo reequilíbrio profundo.",
       icone: <FaYinYang className="text-4xl text-brand-red mb-4" />
+    },
+    {
+      titulo: "Terapia Manual",
+      descricao: "Tratamento especializado focado na recuperação de tendinopatias e esporão de calcâneo, devolvendo a sua mobilidade natural e qualidade de vida.",
+      icone: <FaHands className="text-4xl text-brand-red mb-4" />
     }
   ]
 
