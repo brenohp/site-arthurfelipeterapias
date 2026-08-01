@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { signOut } from 'next-auth/react'
-import { FaFileAlt, FaCog, FaSignOutAlt, FaHome } from 'react-icons/fa'
+import { FaFileAlt, FaCog, FaSignOutAlt, FaHome, FaChartBar, FaTachometerAlt } from 'react-icons/fa'
 
 export default function PainelLayout({
   children,
@@ -13,8 +13,9 @@ export default function PainelLayout({
   const pathname = usePathname()
 
   const links = [
-    { nome: 'Meus Posts', rota: '/painel', icone: <FaFileAlt /> },
-    { nome: 'Configurações do Site', rota: '/painel/configuracoes', icone: <FaCog /> },
+    { nome: 'Visão Geral', rota: '/painel', icone: <FaTachometerAlt /> },
+    { nome: 'Gerenciar Blog', rota: '/painel/blog', icone: <FaFileAlt /> },
+    { nome: 'Configurações', rota: '/painel/configuracoes', icone: <FaCog /> },
   ]
 
   return (
@@ -34,7 +35,8 @@ export default function PainelLayout({
         {/* Links de Navegação */}
         <nav className="flex-1 py-6 px-4 space-y-2">
           {links.map((link) => {
-            const ativo = pathname === link.rota
+            // Verifica se está na rota exata do painel ou dentro de uma subpágina (ex: /painel/blog)
+            const ativo = link.rota === '/painel' ? pathname === '/painel' : pathname.startsWith(link.rota)
             return (
               <Link
                 key={link.rota}
@@ -50,6 +52,17 @@ export default function PainelLayout({
               </Link>
             )
           })}
+
+          {/* Link do Analytics (Futuro / Desativado) */}
+          <div className="flex items-center justify-between px-4 py-3 rounded-md opacity-40 cursor-not-allowed bg-black/20 text-gray-400 select-none">
+            <div className="flex items-center gap-3">
+              <span className="text-lg"><FaChartBar /></span>
+              <span className="font-medium">Analytics</span>
+            </div>
+            <span className="text-[10px] bg-gray-700 text-white px-2 py-0.5 rounded-full uppercase tracking-wider font-bold">
+              Em breve
+            </span>
+          </div>
         </nav>
 
         {/* Rodapé do Menu (Sair e Voltar pro Site) */}
@@ -70,7 +83,7 @@ export default function PainelLayout({
         </div>
       </aside>
 
-      {/* Área Principal (Onde o conteúdo das páginas vai renderizar) */}
+      {/* Área Principal */}
       <main className="flex-1 overflow-y-auto">
         {children}
       </main>

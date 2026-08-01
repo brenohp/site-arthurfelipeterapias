@@ -1,6 +1,29 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 export default function Hero() {
+  const [fotoHero, setFotoHero] = useState('')
+
+  // Busca as configurações (incluindo a foto principal) quando a seção carrega
+  useEffect(() => {
+    async function carregarImagem() {
+      try {
+        const res = await fetch('/api/configuracoes')
+        if (res.ok) {
+          const dados = await res.json()
+          if (dados.fotoHeroUrl) {
+            setFotoHero(dados.fotoHeroUrl)
+          }
+        }
+      } catch (error) {
+        console.error("Erro ao carregar a foto da seção Hero:", error)
+      }
+    }
+    carregarImagem()
+  }, [])
+
   return (
     <section className="flex flex-col md:flex-row items-center gap-10 py-16 md:py-24 overflow-hidden">
       
@@ -13,7 +36,7 @@ export default function Hero() {
         </div>
 
         <h1 className="text-4xl md:text-5xl font-bold text-brand-black leading-tight">
-          Equilíbrio e Bem-estar com <span className="text-brand-red">Terapias Orientais</span>
+          Equilíbrio e Bem-estar com <span className="text-brand-red">Quiropraxia e Terapias</span>
         </h1>
         
         <p className="text-lg text-brand-black/80 font-medium italic border-l-4 border-brand-red pl-4">
@@ -37,9 +60,17 @@ export default function Hero() {
       {/* Coluna da Imagem (Aparece logo depois com delay) */}
       <div className="flex-1 w-full flex justify-center md:justify-end" data-aos="fade-up" data-aos-delay="200">
         <div className="w-72 h-72 md:w-96 md:h-96 rounded-full border-4 border-brand-red flex items-center justify-center bg-black/5 shadow-xl relative overflow-hidden">
-           <span className="text-brand-black/50 text-center px-4">
-             [Espaço para a foto do Arthur Felipe]
-           </span>
+           {fotoHero ? (
+             <img 
+               src={fotoHero} 
+               alt="Arthur Felipe - Terapias Orientais" 
+               className="w-full h-full object-cover"
+             />
+           ) : (
+             <span className="text-brand-black/50 text-center px-4">
+               [Espaço para a foto do Arthur Felipe]
+             </span>
+           )}
         </div>
       </div>
 

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { FaBars, FaTimes, FaWhatsapp, FaClock, FaInstagram } from 'react-icons/fa'
 import { usePathname } from 'next/navigation'
@@ -10,6 +10,28 @@ export default function Header() {
   const pathname = usePathname();
   const fecharMenu = () => setMenuAberto(false)
 
+  // 1. Estados para controlar os textos dinâmicos (iniciam com os valores padrão)
+  const [mensagem, setMensagem] = useState('Bem-vindo à Arthur Felipe Terapias Orientais')
+  const [horario, setHorario] = useState('Seg - Sáb')
+
+  // 2. Busca as configurações salvas no banco de dados quando o Header é carregado
+  useEffect(() => {
+    async function carregarConfiguracoes() {
+      try {
+        const res = await fetch('/api/configuracoes')
+        if (res.ok) {
+          const dados = await res.json()
+          if (dados.mensagemHeader) setMensagem(dados.mensagemHeader)
+          if (dados.horarioHeader) setHorario(dados.horarioHeader)
+        }
+      } catch (error) {
+        console.error("Erro ao carregar configurações do Header:", error)
+      }
+    }
+    carregarConfiguracoes()
+  }, [])
+
+  // Esconde o header nas páginas de painel e login
   if (pathname.startsWith('/painel') || pathname.startsWith('/login')) {
     return null
   }
@@ -22,13 +44,15 @@ export default function Header() {
         <div className="max-w-6xl mx-auto flex justify-between items-center">
           
           <div className="flex items-center gap-2">
-            <span className="text-brand-beige/70 tracking-wide">Bem-vindo à Arthur Felipe Terapias Orientais</span>
+            {/* 3. A mensagem agora é a variável lida do banco */}
+            <span className="text-brand-beige/70 tracking-wide">{mensagem}</span>
           </div>
           
           <div className="flex items-center gap-6 font-medium tracking-wide">
             {/* Relógio */}
             <span className="flex items-center gap-2">
-              <FaClock className="text-brand-red" /> Seg - Sáb
+              {/* 4. O horário agora é a variável lida do banco */}
+              <FaClock className="text-brand-red" /> {horario}
             </span>
             
             {/* Telefone / WhatsApp */}

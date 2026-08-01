@@ -1,4 +1,28 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+
 export default function Sobre() {
+  const [fotoSobre, setFotoSobre] = useState('')
+
+  // Busca as configurações (incluindo a foto) quando a seção carrega
+  useEffect(() => {
+    async function carregarImagem() {
+      try {
+        const res = await fetch('/api/configuracoes')
+        if (res.ok) {
+          const dados = await res.json()
+          if (dados.fotoSobreUrl) {
+            setFotoSobre(dados.fotoSobreUrl)
+          }
+        }
+      } catch (error) {
+        console.error("Erro ao carregar a foto da seção Sobre:", error)
+      }
+    }
+    carregarImagem()
+  }, [])
+
   return (
     <section id="sobre" className="py-16 md:py-24 border-t border-brand-red/20 overflow-hidden">
       <div className="flex flex-col md:flex-row gap-10 items-center">
@@ -21,13 +45,21 @@ export default function Sobre() {
           </div>
         </div>
 
-        {/* Coluna da Imagem/Logo Secundária */}
+        {/* Coluna da Imagem */}
         <div className="flex-1 w-full flex justify-center" data-aos="fade-up" data-aos-delay="200">
-          <div className="w-full max-w-sm aspect-square bg-brand-red/5 rounded-lg border-2 border-dashed border-brand-red/30 flex items-center justify-center p-8 shadow-inner">
-            <p className="text-center text-brand-black/50 font-medium">
-              [Espaço sugerido para a logo redonda ou uma foto em atendimento]
-            </p>
-          </div>
+          {fotoSobre ? (
+            <img 
+              src={fotoSobre} 
+              alt="Arthur Felipe - Fisioterapia e Terapias Orientais" 
+              className="w-full max-w-sm aspect-square object-cover rounded-2xl shadow-xl border-4 border-white"
+            />
+          ) : (
+            <div className="w-full max-w-sm aspect-square bg-brand-red/5 rounded-lg border-2 border-dashed border-brand-red/30 flex items-center justify-center p-8 shadow-inner">
+              <p className="text-center text-brand-black/50 font-medium">
+                [Espaço sugerido para a logo redonda ou uma foto em atendimento]
+              </p>
+            </div>
+          )}
         </div>
 
       </div>

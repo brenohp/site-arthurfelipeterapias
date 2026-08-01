@@ -65,12 +65,12 @@ export default function Contato() {
               <h3 className="font-bold text-xl text-white">Avaliações</h3>
               <p className="text-brand-beige/80 mt-2">5,0 ⭐ no Google</p>
               <a 
-                href="https://www.google.com/search?q=arhur+felipe+terapias&oq=arhur+felipe+terapias&gs_lcrp=EgZjaHJvbWUyCwgAEEUYChg5GKABMgkIARAhGAoYoAHSAQg0MjgzajBqN6gCALACAA&sourceid=chrome&source=chrome.ob&ie=UTF-8#lrd=0x94b9bf6617d2e50f:0xe12c57c6dd1e1a6,1,,,," 
+                href="https://www.google.com/search?sca_esv=a548772bcdb63e65&sxsrf=APpeQnumos_OKKnH5C0xqmnVpMaJL2O2Gg:1785556113165&q=Arthur+Felipe+Terapias+Orientais&si=APenkKm7iecQ4G6P-TsbSMFKIQtv3EFIqRAFw-i8uEbk55Z-_wKnZ25p4R8siZGBzAqwY68r7y_lQtP441zHw5mDXbZojyx_cu3_0wKk5-2O3BQnSMeKpJABVB0ixAhH-IUWLlL2tl9n7h9MGFTzx1ayqTx-7A_xB5njU0lfeVKndeAUQ5u2IIs%3D&sa=X&ved=2ahUKEwjG3Ofuwv6VAxVlJrkGHcVbJ5sQrrQLegQIKRAA&biw=958&bih=910&dpr=1" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-brand-red hover:text-white transition-colors mt-2 inline-block font-medium italic"
               >
-                "O melhor de Ribeirão e região!"
+                Ver avaliações
               </a>
             </div>
           </div>
