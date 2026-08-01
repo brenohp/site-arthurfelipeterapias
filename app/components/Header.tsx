@@ -3,11 +3,16 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { FaBars, FaTimes, FaWhatsapp, FaClock, FaInstagram } from 'react-icons/fa'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [menuAberto, setMenuAberto] = useState(false)
-
+  const pathname = usePathname();
   const fecharMenu = () => setMenuAberto(false)
+
+  if (pathname.startsWith('/painel') || pathname.startsWith('/login')) {
+    return null
+  }
 
   return (
     <div className="w-full sticky top-0 z-50">

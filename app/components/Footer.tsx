@@ -1,7 +1,16 @@
+'use client'
+
 import { FaWhatsapp } from 'react-icons/fa'
+import { usePathname } from 'next/navigation'
 
 export default function Footer() {
   const anoAtual = new Date().getFullYear();
+  const pathname = usePathname();
+
+
+  if (pathname.startsWith('/painel') || pathname.startsWith('/login')){
+    return null; // Não renderiza o Footer nas páginas do painel ou login
+}
 
   return (
     <footer className="w-full bg-brand-black text-brand-beige py-8 border-t-4 border-brand-red mt-auto">
