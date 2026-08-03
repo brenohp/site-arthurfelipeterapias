@@ -22,6 +22,7 @@ export async function GET(
 
     return NextResponse.json(post)
   } catch (error) {
+    console.error("Erro ao buscar post por ID:", error)
     return NextResponse.json({ error: "Erro ao buscar o post" }, { status: 500 })
   }
 }
@@ -41,19 +42,20 @@ export async function PUT(
     const postAtualizado = await prisma.post.update({
       where: { id: postId },
       data: {
-    titulo,
-    resumo,
-    conteudo,
-    slug,
-    tipo: urlVideo ? 'video' : 'blog', // Se tiver vídeo, já podemos classificar como vídeo automaticamente!
-    urlMidia,
-    urlVideo, // <--- Salva o link do vídeo
-    publicado: publicado ?? true
-  }
+        titulo,
+        resumo,
+        conteudo,
+        slug,
+        tipo: urlVideo ? 'video' : 'blog',
+        urlMidia,
+        urlVideo,
+        publicado: publicado ?? true
+      }
     })
 
     return NextResponse.json(postAtualizado)
   } catch (error) {
+    console.error("Erro ao atualizar o post:", error)
     return NextResponse.json({ error: "Erro ao atualizar o post" }, { status: 500 })
   }
 }

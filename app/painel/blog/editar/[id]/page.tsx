@@ -81,20 +81,34 @@ export default function EditarPostPage({ params }: { params: Promise<{ id: strin
     setSalvando(true)
     const slug = gerarSlug(titulo)
     
+    // Log para depuração no console do navegador (pressione F12 para ver)
+    console.log("Enviando para atualização:", { titulo, resumo, conteudo, slug, urlMidia, urlVideo, publicado })
+    
     try {
       const res = await fetch(`/api/posts/${postId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ titulo, resumo, conteudo, slug, urlMidia, urlVideo, publicado })
+        body: JSON.stringify({ 
+          titulo, 
+          resumo, 
+          conteudo, 
+          slug, 
+          urlMidia, 
+          urlVideo, 
+          publicado 
+        })
       })
 
       if (res.ok) {
         alert('Post atualizado com sucesso!')
         router.push('/painel/blog')
       } else {
+        const erroDados = await res.json()
+        console.error("Erro retornado pela API:", erroDados)
         alert('Erro ao atualizar o post.')
       }
     } catch (error) {
+      console.error("Erro de conexão:", error)
       alert('Erro de conexão.')
     } finally {
       setSalvando(false)

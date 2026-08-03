@@ -55,15 +55,22 @@ export default function NovoPostPage() {
       const res = await fetch('/api/posts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ titulo, resumo, conteudo, slug, urlMidia, publicado })
+        body: JSON.stringify({ 
+          titulo, 
+          resumo, 
+          conteudo, 
+          slug, 
+          urlMidia, 
+          urlVideo, // <--- Enviando o link do vídeo corretamente
+          publicado 
+        })
       })
 
       if (res.ok) {
         alert('Post criado com sucesso!')
-        // Redireciona o usuário de volta para a tabela
         router.push('/painel/blog')
       } else {
-        alert('Erro ao salvar o post. Talvez já exista um post com esse título.')
+        alert('Erro ao criar o post.')
       }
     } catch (error) {
       alert('Erro de conexão.')
@@ -79,28 +86,45 @@ export default function NovoPostPage() {
         <Link href="/painel/blog" className="inline-flex items-center gap-2 text-brand-red font-medium hover:text-red-800 transition-colors mb-4">
           <FaArrowLeft /> Voltar
         </Link>
-        <h1 className="text-3xl font-bold text-brand-black">Criar Novo Post</h1>
+        <h1 className="text-3xl font-bold text-brand-black">Novo Artigo / Post</h1>
       </div>
 
       <form onSubmit={handleSalvar} className="space-y-6 bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-200">
         
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Título do Artigo</label>
-          <input type="text" value={titulo} onChange={(e) => setTitulo(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-red outline-none" required />
+          <input 
+            type="text" 
+            value={titulo} 
+            onChange={(e) => setTitulo(e.target.value)} 
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-red outline-none" 
+            required 
+          />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Resumo Breve</label>
-          <textarea value={resumo} onChange={(e) => setResumo(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-red outline-none" rows={2} />
+          <textarea 
+            value={resumo} 
+            onChange={(e) => setResumo(e.target.value)} 
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-red outline-none" 
+            rows={2} 
+          />
         </div>
 
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Conteúdo Completo</label>
-          <textarea value={conteudo} onChange={(e) => setConteudo(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-red outline-none" rows={8} required />
+          <textarea 
+            value={conteudo} 
+            onChange={(e) => setConteudo(e.target.value)} 
+            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-red outline-none" 
+            rows={8} 
+            required 
+          />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Imagem de Capa</label>
+          <label className="block text-sm font-medium text-gray-700 mb-2">Imagem de Capa (Opcional)</label>
           <div className="bg-gray-50 p-4 rounded-lg border border-gray-200 border-dashed flex flex-col md:flex-row items-center gap-6">
             <div className="flex flex-col items-center gap-2">
               {urlMidia ? (
@@ -109,17 +133,24 @@ export default function NovoPostPage() {
                   <button type="button" onClick={() => setUrlMidia('')} className="text-xs text-brand-red font-medium hover:underline">Remover</button>
                 </>
               ) : (
-                <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 p-2"><FaImage className="text-2xl mb-1" /></div>
+                <div className="w-24 h-24 bg-gray-200 rounded-md flex items-center justify-center text-gray-400 p-2">
+                  <FaImage className="text-2xl mb-1" />
+                </div>
               )}
             </div>
             <div className="flex-1 w-full">
               {fazendoUpload && <p className="text-brand-red text-sm mb-2 flex items-center gap-2"><FaSpinner className="animate-spin" /> Enviando...</p>}
-              <input type="file" accept="image/*" onChange={handleUploadImagem} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-red file:text-white hover:file:bg-red-800 cursor-pointer" />
+              <input 
+                type="file" 
+                accept="image/*" 
+                onChange={handleUploadImagem} 
+                className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-brand-red file:text-white hover:file:bg-red-800 cursor-pointer" 
+              />
             </div>
           </div>
         </div>
 
-        {/* Seção de Vídeo do YouTube */}
+        {/* Campo para o Link do Vídeo do YouTube */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-1">Link do Vídeo do YouTube (Opcional)</label>
           <input 
@@ -127,18 +158,27 @@ export default function NovoPostPage() {
             value={urlVideo} 
             onChange={(e) => setUrlVideo(e.target.value)} 
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-brand-red outline-none" 
-            placeholder="Ex: https://www.youtube.com/watch?v=XYZ123 ou link do Shorts"
+            placeholder="Ex: https://www.youtube.com/watch?v=XYZ123"
           />
-          <p className="text-xs text-gray-500 mt-1">Se preenchido, um player profissional do YouTube aparecerá no lugar da imagem de capa.</p>
+          <p className="text-xs text-gray-500 mt-1">Se preenchido, a miniatura do vídeo do YouTube será gerada automaticamente na listagem.</p>
         </div>
 
         <div className="pt-4 border-t flex justify-between items-center">
           <label className="flex items-center gap-2 cursor-pointer">
-            <input type="checkbox" checked={publicado} onChange={(e) => setPublicado(e.target.checked)} className="w-4 h-4 text-brand-red rounded focus:ring-brand-red" />
+            <input 
+              type="checkbox" 
+              checked={publicado} 
+              onChange={(e) => setPublicado(e.target.checked)} 
+              className="w-4 h-4 text-brand-red rounded focus:ring-brand-red" 
+            />
             <span className="text-sm font-medium text-gray-700">Publicar imediatamente</span>
           </label>
           
-          <button type="submit" disabled={salvando || fazendoUpload} className={`bg-brand-red text-white px-8 py-2.5 rounded-md font-bold transition-all shadow-md flex items-center gap-2 ${(salvando || fazendoUpload) ? 'opacity-70 cursor-not-allowed' : 'hover:bg-red-800'}`}>
+          <button 
+            type="submit" 
+            disabled={salvando || fazendoUpload} 
+            className={`bg-brand-red text-white px-8 py-2.5 rounded-md font-bold transition-all shadow-md flex items-center gap-2 ${(salvando || fazendoUpload) ? 'opacity-70 cursor-not-allowed' : 'hover:bg-red-800'}`}
+          >
             <FaSave />
             {salvando ? 'Salvando...' : 'Salvar Artigo'}
           </button>

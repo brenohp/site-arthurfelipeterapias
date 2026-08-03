@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { FaImage, FaPlay } from 'react-icons/fa'
 import { PrismaClient } from '@prisma/client'
 
-// Impede que o Next.js guarde uma versão velha da página
+// Impede que o Next.js guarde cache estático antigo
 export const revalidate = 0; 
 
 export default async function Blog() {
@@ -18,26 +18,16 @@ export default async function Blog() {
     }
   });
 
-  // Função ultra-flexível para capturar o ID e gerar a miniatura do YouTube
+  // Função robusta para capturar a miniatura do YouTube
   const getYouTubeThumbnail = (url: string | null) => {
     if (!url) return null;
-    
-    // Tenta extrair o ID de diferentes formatos de link do YouTube
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
     const match = url.match(regExp);
 
-    // Se encontrou um ID válido com 11 caracteres
     if (match && match[2].length === 11) {
       return `https://img.youtube.com/vi/${match[2]}/hqdefault.jpg`;
     }
     
-    // Fallback: se o usuário colou direto o ID ou outro formato, tenta ler o final
-    const urlParts = url.split('/');
-    const possibleId = urlParts[urlParts.length - 1];
-    if (possibleId.length === 11) {
-      return `https://img.youtube.com/vi/${possibleId}/hqdefault.jpg`;
-    }
-
     return null;
   };
 
@@ -57,7 +47,6 @@ export default async function Blog() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         {posts.map(post => {
-          // Define a imagem a ser exibida: Prioriza a capa enviada, se não houver, tenta pegar a thumb do YouTube
           const ytThumb = getYouTubeThumbnail(post.urlVideo);
           const imagemFinal = post.urlMidia || ytThumb;
 
