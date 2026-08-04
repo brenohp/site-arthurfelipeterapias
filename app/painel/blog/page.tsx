@@ -2,13 +2,17 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FaPlus, FaEdit, FaTrash, FaNewspaper } from 'react-icons/fa'
+import { FaPlus, FaEdit, FaTrash, FaNewspaper, FaVideo, FaImage, FaBullhorn } from 'react-icons/fa'
 
+// 1. Atualizamos o type para receber as URLs de vídeo e mídia
 type Post = {
   id: number
   titulo: string
   createdAt: string
   publicado: boolean
+  urlVideo?: string | null
+  urlMidia?: string | null
+  tipo?: string
 }
 
 export default function BlogListagemPage() {
@@ -32,7 +36,6 @@ export default function BlogListagemPage() {
     carregarPosts()
   }, [])
 
-  // Função para deletar um post
   const handleExcluir = async (id: number) => {
     if (!window.confirm("Tem certeza que deseja excluir este artigo? Essa ação não pode ser desfeita.")) {
       return
@@ -57,11 +60,10 @@ export default function BlogListagemPage() {
   return (
     <div className="p-6 md:p-10 max-w-6xl mx-auto">
       
-      {/* Cabeçalho */}
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-brand-black">Conteúdos Publicados</h1>
-          <p className="text-gray-600 mt-1">Gerencie os artigos do blog do seu site.</p>
+          <h1 className="text-3xl font-bold text-brand-black">Gerenciamento de Posts</h1>
+          <p className="text-gray-600 mt-1">Crie e administre seus vídeos, fotos, avisos e artigos.</p>
         </div>
         <Link 
           href="/painel/blog/novo" 
@@ -71,20 +73,19 @@ export default function BlogListagemPage() {
         </Link>
       </div>
 
-      {/* Tabela de Posts */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left border-collapse">
             <thead>
-              <tr className="bg-gray-100 text-gray-700 text-sm uppercase tracking-wider">
-                <th className="p-4 font-semibold">Tipo</th>
+              <tr className="bg-gray-50 text-gray-500 text-xs uppercase tracking-wider">
+                <th className="p-4 pl-6 font-semibold">Tipo</th>
                 <th className="p-4 font-semibold">Título do Post</th>
                 <th className="p-4 font-semibold">Data</th>
                 <th className="p-4 font-semibold">Status</th>
-                <th className="p-4 font-semibold text-right">Ações</th>
+                <th className="p-4 font-semibold text-right pr-6">Ações</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-gray-100">
               
               {carregando ? (
                 <tr>
@@ -95,54 +96,79 @@ export default function BlogListagemPage() {
                   <td colSpan={5} className="p-10 text-center text-gray-500">Nenhum post encontrado. Clique em "Novo Post" para começar!</td>
                 </tr>
               ) : (
-                posts.map((post) => (
-                  <tr key={post.id} className="hover:bg-gray-50 transition-colors">
-                    <td className="p-4">
-                      <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gray-100 text-brand-red mx-auto">
-                        <FaNewspaper title="Artigo do Blog" />
-                      </div>
-                    </td>
-                    <td className="p-4 font-medium text-brand-black">
-                      {post.titulo}
-                    </td>
-                    <td className="p-4 text-gray-600 text-sm">
-                      {new Date(post.createdAt).toLocaleDateString('pt-BR')}
-                    </td>
-                    <td className="p-4">
-                      <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                        post.publicado 
-                          ? 'bg-green-100 text-green-700' 
-                          : 'bg-yellow-100 text-yellow-700'
-                      }`}>
-                        {post.publicado ? 'Publicado' : 'Rascunho'}
-                      </span>
-                    </td>
-                    
-                    {/* Coluna Ações Corrigida e Alinhada */}
-                    <td className="p-4 text-right">
-                      <div className="flex items-center justify-end gap-2">
-                        {/* Botão de editar */}
-                        <Link 
-                          href={`/painel/blog/editar/${post.id}`}
-                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors flex items-center justify-center" 
-                          title="Editar"
-                        >
-                          <FaEdit size={18} />
-                        </Link>
-                        
-                        {/* Botão de excluir */}
-                        <button 
-                          onClick={() => handleExcluir(post.id)}
-                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center justify-center" 
-                          title="Excluir"
-                        >
-                          <FaTrash size={18} />
-                        </button>
-                      </div>
-                    </td>
+                posts.map((post) => {
+                  
+                  // 2. Lógica Dinâmica de Ícones e Cores
+                  let IconeAtual = FaNewspaper;
+                  let estiloBg = "bg-red-50";
+                  let estiloIcone = "text-brand-red";
 
-                  </tr>
-                ))
+                  if (post.urlVideo) {
+                    IconeAtual = FaVideo;
+                    estiloBg = "bg-blue-50";
+                    estiloIcone = "text-blue-500";
+                  } else if (post.tipo === 'aviso') {
+                    IconeAtual = FaBullhorn;
+                    estiloBg = "bg-yellow-50";
+                    estiloIcone = "text-yellow-500";
+                  } else if (post.urlMidia && !post.urlVideo) {
+                    IconeAtual = FaImage;
+                    estiloBg = "bg-purple-50";
+                    estiloIcone = "text-purple-500";
+                  }
+
+                  return (
+                    <tr key={post.id} className="hover:bg-gray-50/80 transition-colors">
+                      
+                      {/* Coluna do Ícone Dinâmico */}
+                      <td className="p-4 pl-6">
+                        <div className={`flex items-center justify-center w-9 h-9 rounded-full ${estiloBg} ${estiloIcone}`}>
+                          <IconeAtual size={16} />
+                        </div>
+                      </td>
+                      
+                      <td className="p-4 font-semibold text-gray-900">
+                        {post.titulo}
+                      </td>
+                      
+                      <td className="p-4 text-gray-500 text-sm">
+                        {new Date(post.createdAt).toLocaleDateString('pt-BR')}
+                      </td>
+                      
+                      <td className="p-4">
+                        <span className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          post.publicado 
+                            ? 'bg-emerald-100 text-emerald-700' 
+                            : 'bg-amber-100 text-amber-700'
+                        }`}>
+                          {post.publicado ? 'Publicado' : 'Rascunho'}
+                        </span>
+                      </td>
+                      
+                      {/* Ações Alinhadas */}
+                      <td className="p-4 text-right pr-6">
+                        <div className="flex items-center justify-end gap-2">
+                          <Link 
+                            href={`/painel/blog/editar/${post.id}`}
+                            className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors flex items-center justify-center" 
+                            title="Editar"
+                          >
+                            <FaEdit size={16} />
+                          </Link>
+                          
+                          <button 
+                            onClick={() => handleExcluir(post.id)}
+                            className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center justify-center" 
+                            title="Excluir"
+                          >
+                            <FaTrash size={16} />
+                          </button>
+                        </div>
+                      </td>
+
+                    </tr>
+                  )
+                })
               )}
             </tbody>
           </table>
