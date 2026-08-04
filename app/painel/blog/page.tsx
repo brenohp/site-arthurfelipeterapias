@@ -34,7 +34,6 @@ export default function BlogListagemPage() {
 
   // Função para deletar um post
   const handleExcluir = async (id: number) => {
-    // Pede uma confirmação antes de apagar para evitar cliques acidentais
     if (!window.confirm("Tem certeza que deseja excluir este artigo? Essa ação não pode ser desfeita.")) {
       return
     }
@@ -45,7 +44,6 @@ export default function BlogListagemPage() {
       })
       
       if (res.ok) {
-        // Atualiza a tabela na hora, removendo o post que acabou de ser apagado
         setPosts(posts.filter(post => post.id !== id))
         alert("Post excluído com sucesso!")
       } else {
@@ -119,26 +117,30 @@ export default function BlogListagemPage() {
                         {post.publicado ? 'Publicado' : 'Rascunho'}
                       </span>
                     </td>
-                    <td className="p-4 text-right space-x-3">
-                      
-                      {/* Botão de editar */}
-                      <Link 
-                        href={`/painel/blog/editar/${post.id}`}
-                        className="inline-block text-blue-600 hover:text-blue-800 transition-colors p-2" 
-                        title="Editar"
-                      >
-                        <FaEdit size={18} />
-                      </Link>
-                      
-                      {/* Botão de excluir */}
-                      <button 
-                        onClick={() => handleExcluir(post.id)}
-                        className="text-red-600 hover:text-red-800 transition-colors p-2" 
-                        title="Excluir"
-                      >
-                        <FaTrash size={18} />
-                      </button>
+                    
+                    {/* Coluna Ações Corrigida e Alinhada */}
+                    <td className="p-4 text-right">
+                      <div className="flex items-center justify-end gap-2">
+                        {/* Botão de editar */}
+                        <Link 
+                          href={`/painel/blog/editar/${post.id}`}
+                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors flex items-center justify-center" 
+                          title="Editar"
+                        >
+                          <FaEdit size={18} />
+                        </Link>
+                        
+                        {/* Botão de excluir */}
+                        <button 
+                          onClick={() => handleExcluir(post.id)}
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors flex items-center justify-center" 
+                          title="Excluir"
+                        >
+                          <FaTrash size={18} />
+                        </button>
+                      </div>
                     </td>
+
                   </tr>
                 ))
               )}
