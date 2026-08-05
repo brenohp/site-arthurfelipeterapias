@@ -1,7 +1,28 @@
 import { PrismaClient } from '@prisma/client'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { Metadata } from 'next'
 import { FaArrowLeft } from 'react-icons/fa'
+
+
+// Essa função avisa ao Google qual é o título e o resumo do post específico
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
+  const prisma = new PrismaClient()
+  
+  const post = await prisma.post.findUnique({
+    where: { slug: resolvedParams.slug }
+  })
+
+  if (!post) {
+    return { title: 'Post não encontrado' }
+  }
+
+  return {
+    title: `${post.titulo} | Arthur Massoterapeuta`,
+    description: post.resumo,
+  }
+}
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const resolvedParams = await params

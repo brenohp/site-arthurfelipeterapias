@@ -7,11 +7,28 @@ import CookieConsent from './components/CookieConsent'
 import AosInit from './components/AosInit' // <--- NOVA IMPORTAÇÃO
 
 export const metadata: Metadata = {
-  title: 'Arthur Felipe | Terapias',
-  description: 'Tratamentos de Quiropraxia e Terapias Orientais para alívio de dores crônicas. O melhor de Ribeirão Preto e região.',
+  title: 'Arthur Felipe | Terapias Orientais',
+  description: 'Tratamentos de Quiropraxia e Terapias para alívio de dores crônicas. O melhor de Ribeirão Preto e região.',
+  keywords: ['massoterapia', 'fisioterapia', 'massagem', 'relaxamento', 'quiropraxia', 'dor na coluna', 'massagem terapêutica', 'tratamento para dores'],
   icons: {
     icon: '/favicon.ico',
   },
+
+  verification: {
+    google: 'iCti4axdghzMhWGp8Xp262esdo8aZFJ66fE9fp9T__k',
+  },
+
+  openGraph: {
+    title: 'Arthur Felipe | Quiropaxia e Terapias',
+    description: 'Especialista em Quiropraxia, Terapia Manual, tratamento de Coluna, Esporão de Calcâneo e Tendinopatias. Agende sua avaliação e recupere sua qualidade de vida.',
+    type: 'website',
+    locale: 'pt_BR',
+    url: 'https://arthurfelipeterapias.com.br', 
+  },
+  robots: {
+    index: true,
+    follow: true,
+  }
 }
 
 export default function RootLayout({

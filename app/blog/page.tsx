@@ -8,9 +8,12 @@ export const revalidate = 0;
 export default async function Blog() {
   const prisma = new PrismaClient()
 
+  // Busca os posts onde o tipo é 'blog' OU 'video', garantindo que nada suma
   const posts = await prisma.post.findMany({
     where: { 
-      tipo: 'blog',
+      tipo: {
+        in: ['blog', 'video']
+      },
       publicado: true 
     },
     orderBy: { 
