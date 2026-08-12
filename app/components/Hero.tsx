@@ -57,19 +57,17 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Coluna da Imagem (Aparece logo depois com delay) */}
+      {/* Coluna da Imagem */}
       <div className="flex-1 w-full flex justify-center md:justify-end" data-aos="fade-up" data-aos-delay="200">
         <div className="w-72 h-72 md:w-96 md:h-96 rounded-full border-4 border-brand-red flex items-center justify-center bg-black/5 shadow-xl relative overflow-hidden">
-           {fotoHero ? (
+           {/* Agora a imagem só aparece quando estiver pronta, sem piscar texto antes */}
+           {fotoHero && (
              <img 
                src={fotoHero} 
                alt="Arthur Felipe - Terapias Orientais" 
-               className="w-full h-full object-cover"
+               fetchPriority="high"
+               className="w-full h-full object-cover transition-opacity duration-500"
              />
-           ) : (
-             <span className="text-brand-black/50 text-center px-4">
-               [Espaço para a foto do Arthur Felipe]
-             </span>
            )}
         </div>
       </div>

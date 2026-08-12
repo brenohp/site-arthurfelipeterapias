@@ -47,18 +47,13 @@ export default function Sobre() {
 
         {/* Coluna da Imagem */}
         <div className="flex-1 w-full flex justify-center" data-aos="fade-up" data-aos-delay="200">
-          {fotoSobre ? (
+          {/* Se a foto existir, ela renderiza suavemente */}
+          {fotoSobre && (
             <img 
               src={fotoSobre} 
               alt="Arthur Felipe - Fisioterapia e Terapias Orientais" 
-              className="w-full max-w-sm aspect-square object-cover rounded-2xl shadow-xl border-4 border-white"
+              className="w-full max-w-sm aspect-square object-cover rounded-2xl shadow-xl border-4 border-white transition-opacity duration-500"
             />
-          ) : (
-            <div className="w-full max-w-sm aspect-square bg-brand-red/5 rounded-lg border-2 border-dashed border-brand-red/30 flex items-center justify-center p-8 shadow-inner">
-              <p className="text-center text-brand-black/50 font-medium">
-                [Espaço sugerido para a logo redonda ou uma foto em atendimento]
-              </p>
-            </div>
           )}
         </div>
 
