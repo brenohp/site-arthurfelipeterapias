@@ -1,36 +1,15 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
-export default function Hero() {
-  const [fotoHero, setFotoHero] = useState('')
-
-  // Busca as configurações (incluindo a foto principal) quando a seção carrega
-  useEffect(() => {
-    async function carregarImagem() {
-      try {
-        const res = await fetch('/api/configuracoes')
-        if (res.ok) {
-          const dados = await res.json()
-          if (dados.fotoHeroUrl) {
-            setFotoHero(dados.fotoHeroUrl)
-          }
-        }
-      } catch (error) {
-        console.error("Erro ao carregar a foto da seção Hero:", error)
-      }
-    }
-    carregarImagem()
-  }, [])
-
+export default function Hero({ fotoHero }: { fotoHero: string }) {
+  
   return (
     <section className="flex flex-col md:flex-row items-center gap-10 py-16 md:py-24 overflow-hidden">
       
-      {/* Coluna de Texto (Aparece primeiro) */}
+      {/* Coluna de Texto */}
       <div className="flex-1 space-y-6" data-aos="fade-up">
         
-        {/* Selo de Autoridade */}
         <div className="inline-block bg-brand-red/10 border border-brand-red/20 text-brand-red font-semibold px-4 py-1.5 rounded-full text-sm mb-2">
           + Mais de 4.000 atendimentos realizados
         </div>
@@ -60,7 +39,6 @@ export default function Hero() {
       {/* Coluna da Imagem */}
       <div className="flex-1 w-full flex justify-center md:justify-end" data-aos="fade-up" data-aos-delay="200">
         <div className="w-72 h-72 md:w-96 md:h-96 rounded-full border-4 border-brand-red flex items-center justify-center bg-black/5 shadow-xl relative overflow-hidden">
-           {/* Agora a imagem só aparece quando estiver pronta, sem piscar texto antes */}
            {fotoHero && (
              <img 
                src={fotoHero} 

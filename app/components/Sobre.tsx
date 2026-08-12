@@ -1,28 +1,7 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-
-export default function Sobre() {
-  const [fotoSobre, setFotoSobre] = useState('')
-
-  // Busca as configurações (incluindo a foto) quando a seção carrega
-  useEffect(() => {
-    async function carregarImagem() {
-      try {
-        const res = await fetch('/api/configuracoes')
-        if (res.ok) {
-          const dados = await res.json()
-          if (dados.fotoSobreUrl) {
-            setFotoSobre(dados.fotoSobreUrl)
-          }
-        }
-      } catch (error) {
-        console.error("Erro ao carregar a foto da seção Sobre:", error)
-      }
-    }
-    carregarImagem()
-  }, [])
-
+export default function Sobre({ fotoSobre }: { fotoSobre: string }) {
+  
   return (
     <section id="sobre" className="py-16 md:py-24 border-t border-brand-red/20 overflow-hidden">
       <div className="flex flex-col md:flex-row gap-10 items-center">
@@ -34,7 +13,7 @@ export default function Sobre() {
           </h2>
           <div className="space-y-4 text-brand-black/80 text-lg">
             <p>
-              Com dedicação integral ao bem-estar e à saúde física, sou especialista em Fisioterapia e Massoterapia, unindo o conhecimento clínico tradicional com abordagens orientais focadas no reequilíbrio do corpo.
+              Arthur é especialista em alívio de dores com quiropraxia e terapias manuais.
             </p>
             <p>
               Minha especialidade em <strong>Quiropraxia e diversas terapias manuais</strong> permite atuar diretamente na estrutura corporal, aliviando dores crônicas, corrigindo posturas e melhorando a mobilidade de forma eficaz e natural.
@@ -47,7 +26,6 @@ export default function Sobre() {
 
         {/* Coluna da Imagem */}
         <div className="flex-1 w-full flex justify-center" data-aos="fade-up" data-aos-delay="200">
-          {/* Se a foto existir, ela renderiza suavemente */}
           {fotoSobre && (
             <img 
               src={fotoSobre} 
