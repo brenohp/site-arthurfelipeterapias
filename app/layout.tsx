@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import WhatsAppButton from './components/WhatsAppButton'
 import CookieConsent from './components/CookieConsent'
 import AosInit from './components/AosInit' // <--- NOVA IMPORTAÇÃO
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: 'Arthur Felipe | Terapias Orientais',
@@ -47,6 +48,7 @@ export default function RootLayout({
         <WhatsAppButton />
         <CookieConsent />
         <AosInit /> {/* <--- ATIVANDO AS ANIMAÇÕES AQUI */}
+        <Analytics /> {/* <--- VERCEL ANALYTICS ADICIONADO AQUI */}
       </body>
     </html>
   )
